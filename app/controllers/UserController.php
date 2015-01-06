@@ -13,6 +13,12 @@ class UserController extends BaseController {
     {
         $user = User::find($id);
 
-        return View::make('user', array('user' => $user));
+        $userRatings = Rating::where('user_id', $user->id)->get();
+        $movies = array();
+        foreach ($userRatings as $rating) {
+            $movies = array_merge($movies, DB::table('movies')->where('id', $rating->movie_id)->get());
+        }
+
+        return View::make('user', array('user' => $user, 'userRatings' => $userRatings, 'movies' => $movies));
     }
 }

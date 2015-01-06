@@ -23,6 +23,11 @@ Route::get('movies', 'MovieController@index');
 Route::post('movies', 'MovieController@search');
 Route::get('movie/{id}', 'MovieController@show');
 
+Route::resource('bookmark', 'BookmarkController');
+Route::resource('comment', 'CommentController');
+Route::resource('watchlist', 'WatchlistController');
+Route::resource('rating', 'RatingController');
+
 
 
 //Route::post('movies', function() {
