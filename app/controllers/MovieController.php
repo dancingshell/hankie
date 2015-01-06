@@ -9,9 +9,15 @@ class MovieController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		return View::make('movies');
 	}
 
+	public function search()
+	{
+		$search = Input::get('keyword');
+		return View::make('movie');
+		$this->show($search);
+	}
 
 	/**
 	 * Show the form for creating a new resource.
@@ -22,6 +28,7 @@ class MovieController extends \BaseController {
 	{
 		//
 	}
+
 
 
 	/**
@@ -43,7 +50,7 @@ class MovieController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		return View::make('movie', array('search' => $id));
 	}
 
 

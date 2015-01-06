@@ -13,10 +13,24 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('index');
 });
 
 Route::get('users', 'UserController@index');
 
 Route::get('user/{id}', 'UserController@showProfile');
+Route::get('movies', 'MovieController@index');
+Route::post('movies', 'MovieController@search');
+Route::get('movie/{id}', 'MovieController@show');
 
+
+
+//Route::post('movies', function() {
+//	$keyword = Input::get('keyword');
+//
+//});
+
+//Route::get('movies', function()
+//{
+//	return View::make('movies');
+//});
