@@ -77,11 +77,14 @@
         </div>
 
     </div>
-    @if($movie->hankie || $movie->hankie == 0)
+    @if($movie->hankie || $movie->hankie === '0')
         <h4>Score: {{{$movie->hankie}}}</h4>
     @endif
     @if($movie->poster && $movie->poster != 'N/A' )
-        <img src={{$movie->poster}}>
+        <img src={{$movie->poster}}><br/> <br/>
+    @endif
+    @if($movie->imdbTitle)
+        <a href="http://www.imdb.com/title/{{$movie->imdbTitle}}/" class="btn btn-success">Find on IMDB</a>
     @endif
 </div>
 

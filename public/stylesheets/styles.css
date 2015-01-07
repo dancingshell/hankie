@@ -19,13 +19,14 @@
 
 }
 
-.movie-ul>.movie-li p {
+.movie-ul>.movie-li .movie-info {
     width : 200px;
     text-align: center;
     background-color: black;
     height: 70px;
     font-size: 14px;
     color: white;
+    padding: 0px 30px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -49,3 +50,12 @@ a:active,{
 .btn-rate {
     width: 40px;
 }
+
+/*.movie-score {*/
+    /*top: inherit;*/
+    /*width: 40px;*/
+    /*margin: 0px;*/
+    /*background-color: black;*/
+    /*color: #ffffff;*/
+    /*z-index: 2;*/
+/*}*/

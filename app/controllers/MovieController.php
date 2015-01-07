@@ -78,7 +78,8 @@ class MovieController extends \BaseController {
 				$year = $response->Year;
 				$plot = $response->Plot;
 				$poster = $response->Poster;
-				DB::table('movies')->insert(array('name' => $title, 'year' => $year, 'description' => $plot, 'poster' => $poster));
+				$imdbId = $response->imdbID;
+				DB::table('movies')->insert(array('name' => $title, 'year' => $year, 'description' => $plot, 'poster' => $poster, 'imdbTitle' => $imdbId));
 				$movie = Movie::where('name', $title)->get()->first();
 			}
 		}
