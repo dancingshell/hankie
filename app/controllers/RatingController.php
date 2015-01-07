@@ -12,15 +12,40 @@ class RatingController extends \BaseController {
 		//
 	}
 
+	public function rate()
+	{
+		$movie_id = Input::get('movie_id');
+		$movie = Input::get('movie');
+		$user = Input::get('user_id');
+		$score = Input::get('score');
+
+		// check if that user has already rated the movie
+		$oldRating = Rating::where(array('movie_id'=> $movie_id, 'user_id' => $user))->get()->first();
+
+		// if rating exists, update rating
+		if ($oldRating) {
+			$oldRating->score = $score;
+			$oldRating->save();
+		// if no rating exists, create one
+		} else {
+			$newRating = new Rating(array('movie_id'=> $movie_id, 'user_id' => $user, 'score' => $score));
+			$newRating->save();
+		}
+
+
+		return Redirect::action('MovieController@show', array('id' => $movie_id))->with('message', "You gave $movie a rating of $score");
+	}
 
 	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($rating, $movie, $user = null)
 	{
-
+		DB::table('ratings')->insert(array('score' => $rating, 'movie_id' => $movie, 'user_id' => $user ));
+		var_dump("cheese");
+		return Redirect::action('MovieController@show', array('id' => $movie));
 	}
 	/**
 	 * Store a newly created resource in storage.
@@ -29,7 +54,8 @@ class RatingController extends \BaseController {
 	 */
 	public function store($rating, $movie, $user = null)
 	{
-		var_dump($rating);
+		DB::table('ratings')->insert(array('score' => $rating, 'movie_id' => $movie, 'user_id' => $user ));
+		var_dump("cheese");
 		return Redirect::action('MovieController@show', array('id' => $movie));
 	}
 
@@ -40,9 +66,8 @@ class RatingController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show()
 	{
-		//
 	}
 
 
