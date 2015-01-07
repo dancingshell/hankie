@@ -68,6 +68,9 @@
         </div>
 
     </div>
+    @if($movie->hankie)
+        <h4>Score: {{{$movie->hankie}}}</h4>
+    @endif
     @if($movie->poster && $movie->poster != 'N/A' )
         <img src={{$movie->poster}}>
     @endif

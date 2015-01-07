@@ -31,7 +31,10 @@ class RatingController extends \BaseController {
 			$newRating = new Rating(array('movie_id'=> $movie_id, 'user_id' => $user, 'score' => $score));
 			$newRating->save();
 		}
-
+		//TODO average score after multiple users
+		$movieToScore = Movie::where('id', $movie_id)->get()->first();
+		$movieToScore->hankie = $score;
+		$movieToScore->save();
 
 		return Redirect::action('MovieController@show', array('id' => $movie_id))->with('message', "You gave $movie a rating of $score");
 	}
