@@ -1,0 +1,25 @@
+.movie-ul {
+    list-style-type: none;
+}
+
+.movie-ul>.movie-li {
+    width:200px;
+    height:360px;
+    float : left;
+    margin: 10px 20px;
+    overflow:hidden;
+}
+
+.movie-ul>.movie-li img {
+    height: 320px;
+    width : 200px;
+}
+
+.movie-ul>.movie-li p {
+    width : 200px;
+    text-align: center;
+    background-color: black;
+    height: 60px;
+    font-size: 14px;
+    color: white;
+}

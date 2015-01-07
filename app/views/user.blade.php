@@ -1,3 +1,4 @@
+@extends('layouts.master')
 hello! I am {{{ $user->name }}}!!!
 
 <h2>Movies I like:</h2>

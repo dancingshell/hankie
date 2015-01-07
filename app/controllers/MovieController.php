@@ -9,14 +9,13 @@ class MovieController extends \BaseController {
 	 */
 	public function index()
 	{
-		return View::make('movies');
+		$movies = Movie::all();
+		return View::make('movies', array('movies' => $movies));
 	}
 
 	public function search()
 	{
-		$search = Input::get('keyword');
-		return View::make('movie');
-		$this->show($search);
+
 	}
 
 	/**
@@ -26,9 +25,8 @@ class MovieController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
-	}
 
+	}
 
 
 	/**
@@ -38,7 +36,29 @@ class MovieController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$search = Input::get('keyword');
+
+		// check if movie already exists in database
+		$movie = Movie::where('name', 'LIKE', '%'. $search.'%')->get()->first();
+		// if it does not exist, query the IMDB database
+		if (!count($movie)) {
+			$search = urlencode($search);
+			$url = 'http://www.omdbapi.com/?t=' . $search . '&y=&plot=short&r=json';
+
+			$response = \Httpful\Request::get($url)->send();
+			$response = json_decode($response->body);
+			if (count($response) != 1) {
+				//TODO handle exception
+			} else {
+				$title = $response->Title;
+				$year = $response->Year;
+				$plot = $response->Plot;
+				$poster = $response->Poster;
+				DB::table('movies')->insert(array('name' => $title, 'year' => $year, 'description' => $plot, 'poster' => $poster));
+				$movie = Movie::where('name', $title)->get()->first();
+			}
+		}
+		return Redirect::action('MovieController@show', array('id' => $movie->id));
 	}
 
 
@@ -50,7 +70,8 @@ class MovieController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		return View::make('movie', array('search' => $id));
+		$movie = Movie::where('id', $id)->get()->first();
+		return View::make('movie', array('movie' => $movie));
 	}
 
 

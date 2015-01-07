@@ -20,18 +20,17 @@ class RatingController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+
 	}
-
-
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($rating, $movie, $user = null)
 	{
-		//
+		var_dump($rating);
+		return Redirect::action('MovieController@show', array('id' => $movie));
 	}
 
 

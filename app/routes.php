@@ -20,13 +20,16 @@ Route::get('users', 'UserController@index');
 
 Route::get('user/{id}', 'UserController@showProfile');
 Route::get('movies', 'MovieController@index');
-Route::post('movies', 'MovieController@search');
 Route::get('movie/{id}', 'MovieController@show');
+Route::get('movies/create', 'MovieController@create');
+Route::post('movies', 'MovieController@store');
+Route::get('movie', 'RatingController@store');
+
 
 Route::resource('bookmark', 'BookmarkController');
 Route::resource('comment', 'CommentController');
 Route::resource('watchlist', 'WatchlistController');
-Route::resource('rating', 'RatingController');
+
 
 
 

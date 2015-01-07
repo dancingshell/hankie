@@ -1,21 +1,35 @@
-<html>
+<html ng-app="HankieApp">
 <head>
-    <link>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="/javascripts/angular.js"></script>
+    <script src="/javascripts/application.js"></script>
+    <link rel="stylesheet" href="/stylesheets/styles.css" />
+
+    <script>
+        document.querySelector("[name='keyword']").keyup = function () {
+
+
+        }
+    </script>
 </head>
 <body>
-<nav class="navigation">
-    @section('navigation')
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-    @show
-</nav>
+<div ng-controller="HankieController">
+    <div class="container-fluid">
+    <nav class="navigation">
+        @section('navigation')
+        @show
+    </nav>
 
-<div class="container">
-    @yield('content')
-</div>
+    <div class="container">
+        @yield('content')
+    </div>
 
-<div class="sidebar">
-    @yield('sidebar')
+    <div class="sidebar">
+        @yield('sidebar')
+    </div>
+    </div>
 </div>
 </body>
 </html>
