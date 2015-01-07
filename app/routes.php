@@ -29,6 +29,10 @@ Route::resource('movie/comment', 'CommentController');
 Route::resource('movie/watchlist', 'WatchlistController');
 //Route::resource('rating', 'RatingController');
 Route::post('movie/{id}', 'RatingController@rate');
+Route::get('movies/results', array('as' => 'movies.results', function($results = null) {
+	return View::make('results', array('results' => $results));
+}));
+Route::post('movies/result', 'MovieController@selectMovie');
 //Route::post('rating?test', array('as' => 'rating.create'), function($rating, $movie, $user) {
 //	var_dump("test");
 //});

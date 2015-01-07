@@ -7,8 +7,8 @@
         <p>{{{$movie->description}}}</p>
     @endif
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="col-md-2">
+        <div class="col-md-11">
+            <div class="col-md-1 col-md-offset-3">
                 {{ Form::open(array('action' => 'RatingController@rate')) }}
                 {{ Form::hidden('movie', $movie) }}
                 {{ Form::hidden('movie_id', $movie->id) }}
@@ -18,7 +18,7 @@
                 {{ Form::close() }}
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1">
                 {{ Form::open(array('action' => 'RatingController@rate')) }}
                 {{ Form::hidden('movie', $movie) }}
                 {{ Form::hidden('movie_id', $movie->id) }}
@@ -27,7 +27,7 @@
                 {{ Form::submit('2', array('class' => 'btn btn-warning btn-rate')); }}
                 {{ Form::close() }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
                 {{ Form::open(array('action' => 'RatingController@rate')) }}
                 {{ Form::hidden('movie', $movie) }}
                 {{ Form::hidden('movie_id', $movie->id) }}
@@ -36,7 +36,16 @@
                 {{ Form::submit('1', array('class' => 'btn btn-yellow btn-rate')); }}
                 {{ Form::close() }}
             </div>
-            <div class="col-md-2">
+            <div class="col-md-1">
+                {{ Form::open(array('action' => 'RatingController@rate')) }}
+                {{ Form::hidden('movie', $movie) }}
+                {{ Form::hidden('movie_id', $movie->id) }}
+                {{ Form::hidden('user_id', 15) }}
+                {{ Form::hidden('score', 0) }}
+                {{ Form::submit('0', array('class' => 'btn btn-default btn-rate')); }}
+                {{ Form::close() }}
+            </div>
+            <div class="col-md-1">
                 {{ Form::open(array('action' => 'RatingController@rate')) }}
                 {{ Form::hidden('movie', $movie) }}
                 {{ Form::hidden('movie_id', $movie->id) }}
@@ -46,7 +55,7 @@
                 {{ Form::close() }}
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1">
                 {{ Form::open(array('action' => 'RatingController@rate')) }}
                 {{ Form::hidden('movie', $movie) }}
                 {{ Form::hidden('movie_id', $movie->id) }}
@@ -56,7 +65,7 @@
                 {{ Form::close() }}
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-1">
                 {{ Form::open(array('action' => 'RatingController@rate')) }}
                 {{ Form::hidden('movie', $movie) }}
                 {{ Form::hidden('movie_id', $movie->id) }}
