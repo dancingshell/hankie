@@ -1,7 +1,7 @@
+@extends('layouts.master')
 <div class="text-center container">
-    @extends('layouts.master')
     <br>
-    {{HTML::linkAction('MovieController@index', '<- Search for movies', null, array('class' => 'btn btn-warning pull-left'))}}<br />
+    {{HTML::linkAction('MovieController@index', 'Search for movies', null, array('class' => 'btn btn-warning pull-left'))}}<br />
     <h1>{{{$movie->name}}}</h1>
     @if($movie->description != 'N/A' )
         <p>{{{$movie->description}}}</p>
@@ -77,7 +77,7 @@
         </div>
 
     </div>
-    @if($movie->hankie)
+    @if($movie->hankie || $movie->hankie == 0)
         <h4>Score: {{{$movie->hankie}}}</h4>
     @endif
     @if($movie->poster && $movie->poster != 'N/A' )
