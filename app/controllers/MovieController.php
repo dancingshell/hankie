@@ -33,7 +33,7 @@ class MovieController extends \BaseController {
 	{
 		$search = Input::get('keyword');
 
-		// check if movie already exists in database
+		// find all similar results in DB
 		$moviesDB = Movie::where('name', 'LIKE', '%'. $search.'%')->get();
 		$imdbSearch = new \imdbsearch();
 		$search = urlencode($search);
@@ -57,7 +57,6 @@ class MovieController extends \BaseController {
 			}
 		}
 
-
 		return View::make('results', array('results' => $searchResults));
 	}
 
@@ -65,9 +64,9 @@ class MovieController extends \BaseController {
 	{
 		$movieSelection = Input::get('movie');
 		$inDB = Input::get('inDB');
-		if ($inDB) {
-			$movie = Movie::where('name', $movieSelection)->get()->first();
-		} else {
+		// check if movie is already in DB before creating
+		$movie = Movie::where('name', $movieSelection)->get()->first();
+		if ($inDB || !count($movie)) {
 			$search = urlencode($movieSelection);
 			$url = 'http://www.omdbapi.com/?t=' . $search . '&y=&plot=short&r=json';
 			$response = \Httpful\Request::get($url)->send();
