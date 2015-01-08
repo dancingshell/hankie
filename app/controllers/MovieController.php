@@ -42,21 +42,24 @@ class MovieController extends \BaseController {
 		$searchResults = array();
 		foreach ($results as $result) {
 			/* @var $result \imdb */
-			$searchResults[$result->title()] = ['year' => $result->year(), 'fromDB' => false];
+			$searchResults[] = array('name' => $result->title(),'year' => $result->year(), 'fromDB' => false);
 		}
-		// if it does not exist, query the IMDB database
-		if (count($moviesDB)) {
-			if (count($moviesDB) > 1) {
-				foreach ($moviesDB as $movie) {
-					/* @var $result \imdb */
-					$searchResults[$movie->name] = ['year' => $movie->year, 'fromDB' => true];
-				}
-			} else {
-				$first = $moviesDB->first();
-				$searchResults[$first->name] = ['year' => $first->year, 'fromDB' => true];
-			}
-		}
-
+		// get matching results from our own db
+//		if (count($moviesDB)) {
+//			if (count($moviesDB) > 1) {
+//				foreach ($moviesDB as $movie) {
+//					/* @var $result \imdb */
+//					if ($movie->name != $result->title() && $movie->year != $result->year()) {
+//						$searchResults[] = array('name' => $movie->name, 'year' => $movie->year, 'fromDB' => true);
+//					}
+//				}
+//			} else {
+//				$movie = $moviesDB->first();
+//				if ($movie->name != $result->title() && $movie->year != $result->year()) {
+//					$searchResults[] = array('name' => $movie->name, 'year' => $movie->year, 'fromDB' => true);
+//				}
+//			}
+//		}
 		return View::make('results', array('results' => $searchResults));
 	}
 
@@ -68,7 +71,7 @@ class MovieController extends \BaseController {
 		$movie = Movie::where('name', $movieSelection)->get()->first();
 		if ($inDB || !count($movie)) {
 			$search = urlencode($movieSelection);
-			$url = 'http://www.omdbapi.com/?t=' . $search . '&y=&plot=short&r=json';
+			$url = 'http://www.omdbapi.com/?t=' . $search . '&y=&plot=short&r=json&tomatoes=true';
 			$response = \Httpful\Request::get($url)->send();
 			$response = json_decode($response->body);
 			if (count($response) != 1) {
@@ -79,7 +82,8 @@ class MovieController extends \BaseController {
 				$plot = $response->Plot;
 				$poster = $response->Poster;
 				$imdbId = $response->imdbID;
-				DB::table('movies')->insert(array('name' => $title, 'year' => $year, 'description' => $plot, 'poster' => $poster, 'imdbTitle' => $imdbId));
+				$tomato = $response->tomatoMeter;
+				DB::table('movies')->insert(array('name' => $title, 'year' => $year, 'description' => $plot, 'poster' => $poster, 'imdbTitle' => $imdbId, 'tomato' => $tomato));
 				$movie = Movie::where('name', $title)->get()->first();
 			}
 		}

@@ -3,7 +3,7 @@
     <h1>3 Hankie</h1>
     <h3>Movie Mood Ratings</h3>
 
-    <form class="form-inline">
+    <div class="form-inline">
         {{Form::open(array('action' => 'MovieController@store')) }}
         <div class="form-group">
             <div class="sr-only"></div>
@@ -14,7 +14,7 @@
             {{Form::submit('SEARCH', array('class' => 'btn btn-success'))}}
         </div>
         {{Form::close()}}
-    </form>
+    </div>
 
 </div>
 
@@ -22,13 +22,17 @@
 @foreach($movies as $movie)
     @if($movie->poster && $movie->poster != 'N/A')
         <li class="movie-li">
-
             <a href={{URL::action('MovieController@show', $movie->id)}}><img src={{asset($movie->poster)}}>
-                <div class="movie-info">
-                    <p>{{$movie->name}}</p>
-                    {{--<div class="movie-score">--}}
-                    {{--{{{$movie->hankie}}}--}}
-                    {{--</div>--}}
+                <div class="movie-info row">
+                    <div class="col-md-3">
+                        {{{$movie->hankie}}}
+                    </div>
+                    <div class="col-md-8 text-center">
+                        {{$movie->name}}
+                    </div>
+                    <div class="col-md-1">
+                        {{{$movie->tomato}}}
+                    </div>
                 </div>
             </a>
         </li>
