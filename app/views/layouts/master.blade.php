@@ -16,6 +16,7 @@
 </head>
 <body>
 <div ng-controller="HankieController">
+    {{{FacebookSession::setDefaultApplication('324431691096172', '92fdd773ab0069b9b0d850689e139de0')}}}
     <div class="container-fluid">
     <nav class="navigation">
         @section('navigation')

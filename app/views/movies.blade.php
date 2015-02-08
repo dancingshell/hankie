@@ -1,3 +1,16 @@
+<fb:login-button scope="public_profile,email" data-auto-logout-link="true" onlogin="checkLoginState();">
+</fb:login-button>
+
+<!--
+  Below we include the Login Button social plugin. This button uses
+  the JavaScript SDK to present a graphical Login button that triggers
+  the FB.login() function when clicked.
+-->
+<div id="status">
+</div>
+
+{{--{{FacebookSession::setDefaultApplication('YOUR_APP_ID', 'YOUR_APP_SECRET');}}--}}
+
 @extends('layouts.master')
 <div class="text-center">
     <h1>3 Hankie</h1>
